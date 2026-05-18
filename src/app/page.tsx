@@ -56,8 +56,8 @@ export default async function HomePage() {
               <Sparkles className="h-3.5 w-3.5 text-accent" />
               Peer-to-peer baggage marketplace
             </span>
-            <h1 className="display mt-6 text-5xl text-foreground sm:text-6xl md:text-7xl">
-              Find someone <span className="text-brand-700">already flying</span> there.
+            <h1 className="display mt-6 text-balance text-5xl text-foreground sm:text-6xl md:text-[5.25rem] md:leading-[0.98]">
+              Find someone <em className="font-serif italic text-foreground/95">already flying</em> there.
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground md:text-xl">
               BagSlot lets you send small items with verified travelers who already have empty
@@ -68,9 +68,9 @@ export default async function HomePage() {
           <div className="mx-auto mt-10 max-w-4xl">
             <HeroSearch />
             <div className="mt-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-xs text-muted-foreground">
-              <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-brand-600" /> Escrowed payment</span>
-              <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-brand-600" /> ID-verified travelers</span>
-              <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-brand-600" /> No sealed packages — ever</span>
+              <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-foreground" /> Escrowed payment</span>
+              <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-foreground" /> ID-verified travelers</span>
+              <span className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5 text-foreground" /> No sealed packages — ever</span>
             </div>
           </div>
 
@@ -81,7 +81,7 @@ export default async function HomePage() {
                   key={r}
                   className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-2 text-sm font-medium text-foreground backdrop-blur"
                 >
-                  <Plane className="h-3.5 w-3.5 text-brand-600" /> {r}
+                  <Plane className="h-3.5 w-3.5 text-foreground" /> {r}
                 </span>
               ))}
             />
@@ -121,7 +121,7 @@ export default async function HomePage() {
             ].map((step) => (
               <Card key={step.n} className="group relative overflow-hidden p-7 transition hover:border-brand-300 hover:shadow-soft">
                 <div className="flex items-center justify-between">
-                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-700 transition group-hover:bg-brand-600 group-hover:text-white">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand-700 transition group-hover:bg-foreground group-hover:text-background">
                     <step.icon className="h-5 w-5" />
                   </span>
                   <span className="font-mono text-sm text-muted-foreground">{step.n}</span>
@@ -150,7 +150,7 @@ export default async function HomePage() {
 
           {trips.length === 0 ? (
             <Card className="mt-8 p-12 text-center">
-              <Plane className="mx-auto h-7 w-7 text-brand-600" />
+              <Plane className="mx-auto h-7 w-7 text-foreground" />
               <h3 className="mt-4 text-lg font-semibold">Be the first to post a trip</h3>
               <p className="mt-1 text-sm text-muted-foreground">
                 The marketplace is growing. Post your route — senders will find you.
@@ -340,22 +340,25 @@ export default async function HomePage() {
       </section>
 
       {/* ============================== CTA ============================== */}
-      <section className="relative overflow-hidden bg-brand-700 text-white">
+      <section className="relative overflow-hidden bg-foreground text-background">
         <div className="grain pointer-events-none absolute inset-0 opacity-40 mix-blend-overlay" />
-        <div className="container-page relative grid items-center gap-10 py-20 md:grid-cols-2 md:py-24">
+        <div className="absolute -left-32 top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-white/[0.04] blur-3xl" />
+        <div className="absolute -right-32 top-1/2 h-[420px] w-[420px] -translate-y-1/2 rounded-full bg-white/[0.04] blur-3xl" />
+        <div className="container-page relative grid items-center gap-10 py-20 md:grid-cols-2 md:py-28">
           <div>
             <h2 className="display text-3xl md:text-5xl">
-              Your suitcase isn't full.<br /> Someone needs the space.
+              Your suitcase isn&apos;t full.<br />
+              <em className="font-serif italic">Someone</em> needs the space.
             </h2>
-            <p className="mt-4 max-w-xl text-brand-50/90">
+            <p className="mt-5 max-w-xl text-background/70">
               Post your trip or send your first item in under a minute. No subscription.
             </p>
           </div>
           <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
-            <Button asChild size="lg" variant="secondary" className="bg-white text-brand-700 hover:bg-white/90">
+            <Button asChild size="lg" className="bg-background text-foreground hover:bg-background/90">
               <Link href="/trips/new"><Plane className="h-4 w-4" /> Post a trip</Link>
             </Button>
-            <Button asChild size="lg" className="border border-white/30 bg-transparent text-white hover:bg-white/10">
+            <Button asChild size="lg" variant="outline" className="border-white/20 bg-transparent text-background hover:bg-white/10">
               <Link href="/search"><Search className="h-4 w-4" /> Find a trip</Link>
             </Button>
           </div>
@@ -413,7 +416,7 @@ function SplitCard({
         <ul className="mt-5 space-y-2">
           {bullets.map((b) => (
             <li key={b} className="flex items-center gap-2 text-sm">
-              <CheckCircle2 className="h-4 w-4 text-brand-600" /> {b}
+              <CheckCircle2 className="h-4 w-4 text-foreground" /> {b}
             </li>
           ))}
         </ul>

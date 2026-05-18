@@ -4,35 +4,35 @@
 
 @layer base {
   :root {
-    /* Background tones — warm off-white inspired by Airbnb / Linear */
-    --background: 40 30% 99%;
-    --foreground: 222 47% 11%;
+    /* Warm off-white base — Linear / Resend / Vercel aesthetic */
+    --background: 36 22% 98%;
+    --foreground: 222 47% 7%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card-foreground: 222 47% 7%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover-foreground: 222 47% 7%;
 
-    /* Brand: refined teal, restrained */
-    --primary: 173 75% 22%;
-    --primary-foreground: 0 0% 100%;
+    /* Primary: near-black ink. Single tone, no accent color. */
+    --primary: 222 47% 9%;
+    --primary-foreground: 36 22% 98%;
 
-    --secondary: 173 30% 96%;
-    --secondary-foreground: 173 75% 18%;
+    --secondary: 36 18% 95%;
+    --secondary-foreground: 222 47% 9%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 222 12% 42%;
+    --muted: 36 14% 95%;
+    --muted-foreground: 222 12% 38%;
 
-    --accent: 28 88% 56%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 36 18% 92%;
+    --accent-foreground: 222 47% 9%;
 
     --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 14% 92%;
-    --input: 220 14% 90%;
-    --ring: 173 75% 22%;
+    --border: 30 10% 90%;
+    --input: 30 10% 88%;
+    --ring: 222 47% 9%;
 
     --radius: 0.875rem;
   }
@@ -47,15 +47,17 @@
     letter-spacing: -0.011em;
   }
   h1, h2, h3, h4, h5 { letter-spacing: -0.022em; }
-  ::selection { background: hsl(var(--primary) / 0.18); color: hsl(var(--primary)); }
+  ::selection { background: hsl(var(--foreground)); color: hsl(var(--background)); }
 }
 
 @layer components {
   .container-page { @apply mx-auto w-full max-w-7xl px-5 sm:px-8 lg:px-10; }
   .container-narrow { @apply mx-auto w-full max-w-4xl px-5 sm:px-8; }
   .card-surface { @apply rounded-2xl border border-border bg-card shadow-card; }
+
+  /* Chips are now monochrome — soft cream surface, ink text */
   .chip {
-    @apply inline-flex items-center gap-1.5 rounded-full bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700;
+    @apply inline-flex items-center gap-1.5 rounded-full bg-secondary px-2.5 py-1 text-xs font-medium text-foreground;
   }
   .chip-muted {
     @apply inline-flex items-center gap-1.5 rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground;
@@ -63,6 +65,10 @@
   .chip-outline {
     @apply inline-flex items-center gap-1.5 rounded-full border border-border bg-card/80 px-3 py-1 text-xs font-medium text-foreground shadow-sm backdrop-blur;
   }
+  .chip-ink {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-foreground px-2.5 py-1 text-xs font-medium text-background;
+  }
+
   .display {
     @apply font-semibold tracking-[-0.04em];
   }
@@ -70,8 +76,11 @@
     background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
   }
   .dotgrid {
-    background-image: radial-gradient(hsl(220 13% 80%) 1px, transparent 1px);
+    background-image: radial-gradient(hsl(30 10% 80%) 1px, transparent 1px);
     background-size: 22px 22px;
+  }
+  .gradient-fade-b {
+    mask-image: linear-gradient(to bottom, black 60%, transparent);
   }
 }
 

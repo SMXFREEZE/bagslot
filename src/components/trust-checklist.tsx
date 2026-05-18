@@ -7,7 +7,7 @@ export function TrustChecklist({ compact = false }: { compact?: boolean }) {
     <ul className="space-y-2.5">
       {items.map((rule, i) => (
         <li key={i} className="flex items-start gap-2 text-sm text-foreground">
-          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-brand-600" />
+          <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-foreground" />
           <span>{rule}</span>
         </li>
       ))}
