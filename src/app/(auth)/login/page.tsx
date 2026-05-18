@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Plane } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { LoginForm } from "./form";
+import { GoogleSignInButton } from "@/components/google-signin-button";
+import { Separator } from "@/components/ui/separator";
 
 export const metadata = { title: "Sign in" };
 
@@ -14,6 +16,10 @@ export default function LoginPage() {
             <Plane className="h-4 w-4" />
           </span>
           <h1 className="text-xl font-semibold tracking-tight">Welcome back</h1>
+        </div>
+        <GoogleSignInButton label="Continue with Google" />
+        <div className="my-5 flex items-center gap-3 text-xs text-muted-foreground">
+          <Separator className="flex-1" /> or <Separator className="flex-1" />
         </div>
         <LoginForm />
         <p className="mt-6 text-center text-sm text-muted-foreground">

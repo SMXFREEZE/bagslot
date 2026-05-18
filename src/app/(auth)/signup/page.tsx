@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Plane } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { SignupForm } from "./form";
+import { GoogleSignInButton } from "@/components/google-signin-button";
+import { Separator } from "@/components/ui/separator";
 
 export const metadata = { title: "Create an account" };
 
@@ -18,6 +20,10 @@ export default function SignupPage() {
         <p className="mb-5 text-sm text-muted-foreground">
           A peer-to-peer marketplace for empty suitcase space. Send small items with verified travelers.
         </p>
+        <GoogleSignInButton label="Sign up with Google" />
+        <div className="my-5 flex items-center gap-3 text-xs text-muted-foreground">
+          <Separator className="flex-1" /> or <Separator className="flex-1" />
+        </div>
         <SignupForm />
         <p className="mt-6 text-center text-sm text-muted-foreground">
           Already have an account?{" "}

@@ -30,16 +30,16 @@ export async function SiteHeader() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-background/80 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/70 backdrop-blur-xl">
       <div className="container-page flex h-16 items-center justify-between gap-4">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-brand-600 text-white">
+          <span className="grid h-8 w-8 place-items-center rounded-xl bg-brand-700 text-white shadow-soft">
             <Plane className="h-4 w-4" />
           </span>
-          <span className="text-base tracking-tight">BagSlot</span>
+          <span className="text-[15px] tracking-tight">BagSlot</span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav className="hidden items-center gap-0.5 md:flex">
           <Button asChild variant="ghost" size="sm">
             <Link href="/search">
               <Search className="h-4 w-4" /> Find a trip

@@ -51,6 +51,20 @@ export async function signInWithPassword(formData: FormData): Promise<AuthResult
   redirect("/dashboard");
 }
 
+export async function signInWithGoogle(): Promise<AuthResult & { url?: string }> {
+  const supabase = await createSupabaseServerClient();
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: "google",
+    options: {
+      redirectTo: `${env.appUrl}/auth/callback?next=/onboarding`,
+      queryParams: { access_type: "offline", prompt: "consent" },
+    },
+  });
+  if (error) return { ok: false, error: error.message };
+  if (!data.url) return { ok: false, error: "Google sign-in unavailable." };
+  redirect(data.url);
+}
+
 export async function signOut(): Promise<void> {
   const supabase = await createSupabaseServerClient();
   await supabase.auth.signOut();
