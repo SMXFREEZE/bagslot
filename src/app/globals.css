@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 33% 98%;
+    --foreground: 200 30% 8%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 200 30% 8%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 200 30% 8%;
+
+    --primary: 173 80% 26%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 173 50% 96%;
+    --secondary-foreground: 173 80% 18%;
+
+    --muted: 210 16% 96%;
+    --muted-foreground: 215 14% 45%;
+
+    --accent: 173 50% 96%;
+    --accent-foreground: 173 80% 18%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 14% 91%;
+    --input: 220 14% 91%;
+    --ring: 173 80% 26%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+  html, body { scroll-behavior: smooth; }
+}
+
+@layer components {
+  .container-page { @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8; }
+  .card-surface { @apply rounded-2xl border border-border bg-card shadow-card; }
+  .chip {
+    @apply inline-flex items-center gap-1 rounded-full bg-brand-50 px-2.5 py-1 text-xs font-medium text-brand-700;
+  }
+  .chip-muted {
+    @apply inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-xs font-medium text-muted-foreground;
+  }
+}
