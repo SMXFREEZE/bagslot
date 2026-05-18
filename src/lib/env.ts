@@ -17,12 +17,19 @@ export const env = {
   stripePublishable: optional("NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY"),
   stripeWebhookSecret: optional("STRIPE_WEBHOOK_SECRET"),
 
+  resendApiKey: optional("RESEND_API_KEY"),
+  resendFromEmail: process.env.RESEND_FROM_EMAIL ?? "BagSlot <notifications@bagslot.app>",
+
+  googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY ?? "",
+
   appUrl: process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000",
   adminEmails: (process.env.ADMIN_EMAILS ?? "").split(",").map((s) => s.trim()).filter(Boolean),
 };
 
 export const hasSupabase = Boolean(env.supabaseUrl && env.supabaseAnonKey);
 export const hasStripe = Boolean(env.stripeSecret && env.stripePublishable);
+export const hasResend = Boolean(env.resendApiKey);
+export const hasGoogleMaps = Boolean(env.googleMapsApiKey);
 
 export function assertSupabase() {
   if (!hasSupabase) {

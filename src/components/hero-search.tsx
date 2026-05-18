@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Search, MapPin, Calendar, Package } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { CityAutocomplete } from "@/components/city-autocomplete";
 import { cn } from "@/lib/utils";
 
 export function HeroSearch({ className }: { className?: string }) {
@@ -24,19 +25,19 @@ export function HeroSearch({ className }: { className?: string }) {
       )}
     >
       <Field icon={<MapPin className="h-4 w-4" />} label="From">
-        <Input
-          className="border-0 bg-transparent px-1 shadow-none focus-visible:ring-0"
-          placeholder="Any city"
+        <CityAutocomplete
           value={state.from}
-          onChange={(e) => setState((s) => ({ ...s, from: e.target.value }))}
+          onChange={(v) => setState((s) => ({ ...s, from: v }))}
+          placeholder="Any city"
+          className="border-0 bg-transparent px-1 shadow-none focus-visible:ring-0"
         />
       </Field>
       <Field icon={<MapPin className="h-4 w-4" />} label="To">
-        <Input
-          className="border-0 bg-transparent px-1 shadow-none focus-visible:ring-0"
-          placeholder="Anywhere"
+        <CityAutocomplete
           value={state.to}
-          onChange={(e) => setState((s) => ({ ...s, to: e.target.value }))}
+          onChange={(v) => setState((s) => ({ ...s, to: v }))}
+          placeholder="Anywhere"
+          className="border-0 bg-transparent px-1 shadow-none focus-visible:ring-0"
         />
       </Field>
       <Field icon={<Calendar className="h-4 w-4" />} label="After">

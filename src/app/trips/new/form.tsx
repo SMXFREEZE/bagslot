@@ -5,12 +5,17 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Plane, MapPin, Calendar, Package, DollarSign, ShieldCheck } from "lucide-react";
+import { CityAutocomplete } from "@/components/city-autocomplete";
 import { createTrip } from "../actions";
 
 export function NewTripForm() {
   const [error, setError] = useState<string | null>(null);
   const [confirmed, setConfirmed] = useState(false);
   const [isPending, startTransition] = useTransition();
+  const [departureCity, setDepartureCity] = useState("");
+  const [departureCountry, setDepartureCountry] = useState("");
+  const [destinationCity, setDestinationCity] = useState("");
+  const [destinationCountry, setDestinationCountry] = useState("");
 
   return (
     <form
@@ -28,10 +33,52 @@ export function NewTripForm() {
       className="space-y-5"
     >
       <Section icon={MapPin} title="Route" subtitle="Where are you flying?">
-        <Field name="departure_city" label="From city *" placeholder="e.g. Montreal" required />
-        <Field name="departure_country" label="From country *" placeholder="e.g. Canada" required />
-        <Field name="destination_city" label="To city *" placeholder="e.g. Paris" required />
-        <Field name="destination_country" label="To country *" placeholder="e.g. France" required />
+        <div className="space-y-1.5">
+          <Label htmlFor="departure_city">From city *</Label>
+          <CityAutocomplete
+            id="departure_city"
+            name="departure_city"
+            value={departureCity}
+            onChange={setDepartureCity}
+            onCountryChange={setDepartureCountry}
+            placeholder="e.g. Montreal"
+            required
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="departure_country">From country *</Label>
+          <Input
+            id="departure_country"
+            name="departure_country"
+            value={departureCountry}
+            onChange={(e) => setDepartureCountry(e.target.value)}
+            placeholder="e.g. Canada"
+            required
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="destination_city">To city *</Label>
+          <CityAutocomplete
+            id="destination_city"
+            name="destination_city"
+            value={destinationCity}
+            onChange={setDestinationCity}
+            onCountryChange={setDestinationCountry}
+            placeholder="e.g. Paris"
+            required
+          />
+        </div>
+        <div className="space-y-1.5">
+          <Label htmlFor="destination_country">To country *</Label>
+          <Input
+            id="destination_country"
+            name="destination_country"
+            value={destinationCountry}
+            onChange={(e) => setDestinationCountry(e.target.value)}
+            placeholder="e.g. France"
+            required
+          />
+        </div>
       </Section>
 
       <Section icon={Calendar} title="Travel details" subtitle="Your flight info">

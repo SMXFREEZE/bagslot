@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { CityAutocomplete } from "@/components/city-autocomplete";
 import { Search } from "lucide-react";
 
 export function SearchFilters({ defaults }: { defaults: { from?: string; to?: string; date?: string; weight?: string; max_price?: string } }) {
@@ -33,11 +34,21 @@ export function SearchFilters({ defaults }: { defaults: { from?: string; to?: st
     <form onSubmit={submit} className="grid grid-cols-1 gap-3 md:grid-cols-6">
       <div className="md:col-span-2">
         <Label htmlFor="from" className="text-xs">From</Label>
-        <Input id="from" placeholder="Any city" value={state.from} onChange={onChange("from")} />
+        <CityAutocomplete
+          id="from"
+          value={state.from}
+          onChange={(v) => setState((s) => ({ ...s, from: v }))}
+          placeholder="Any city"
+        />
       </div>
       <div className="md:col-span-2">
         <Label htmlFor="to" className="text-xs">To</Label>
-        <Input id="to" placeholder="Any city" value={state.to} onChange={onChange("to")} />
+        <CityAutocomplete
+          id="to"
+          value={state.to}
+          onChange={(v) => setState((s) => ({ ...s, to: v }))}
+          placeholder="Any city"
+        />
       </div>
       <div>
         <Label htmlFor="date" className="text-xs">After</Label>
