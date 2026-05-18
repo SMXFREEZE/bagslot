@@ -19,7 +19,18 @@ const requestSchema = z.object({
   item_value: z.coerce.number().min(0).default(0),
   pickup_deadline: z.string().optional().nullable(),
   delivery_notes: z.string().optional().nullable(),
+  item_photos: z.string().optional().nullable(),
 });
+
+function parsePhotos(raw: unknown): string[] {
+  if (typeof raw !== "string" || !raw) return [];
+  try {
+    const v = JSON.parse(raw);
+    return Array.isArray(v) ? v.filter((x) => typeof x === "string") : [];
+  } catch {
+    return [];
+  }
+}
 
 export interface CreateRequestResult {
   ok: boolean;
@@ -76,6 +87,7 @@ export async function createItemRequest(formData: FormData): Promise<CreateReque
       item_value: data.item_value,
       pickup_deadline: data.pickup_deadline || null,
       delivery_notes: data.delivery_notes,
+      item_photos: parsePhotos(data.item_photos),
       safety_status: safety.status,
       status: "submitted",
     })

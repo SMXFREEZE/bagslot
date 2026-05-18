@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Search, Plane, Bell, ShieldCheck, Plus, LogOut } from "lucide-react";
+import { Search, Plane, ShieldCheck, Plus, LogOut } from "lucide-react";
+import { NotificationBell } from "@/components/notification-bell";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -60,16 +61,7 @@ export async function SiteHeader() {
         <div className="flex items-center gap-2">
           {profile ? (
             <>
-              <Button asChild variant="ghost" size="icon" className="relative">
-                <Link href="/notifications">
-                  <Bell className="h-4 w-4" />
-                  {unreadCount > 0 && (
-                    <span className="absolute -right-1 -top-1 flex h-4 min-w-[16px] items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-semibold text-white">
-                      {unreadCount > 9 ? "9+" : unreadCount}
-                    </span>
-                  )}
-                </Link>
-              </Button>
+              <NotificationBell userId={profile.id} initialCount={unreadCount} />
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <button className="rounded-full focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-1">
@@ -83,6 +75,7 @@ export async function SiteHeader() {
                   <DropdownMenuItem asChild><Link href="/dashboard/traveler">My trips</Link></DropdownMenuItem>
                   <DropdownMenuItem asChild><Link href="/dashboard/sender">My requests</Link></DropdownMenuItem>
                   <DropdownMenuItem asChild><Link href="/notifications">Notifications</Link></DropdownMenuItem>
+                  <DropdownMenuItem asChild><Link href="/account">Account</Link></DropdownMenuItem>
                   {profile.is_admin && (
                     <>
                       <DropdownMenuSeparator />

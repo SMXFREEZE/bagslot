@@ -5,6 +5,8 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { MobileBottomNav } from "@/components/mobile-bottom-nav";
 import { Toaster } from "@/components/toast";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"),
@@ -30,6 +32,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main className="pb-20 md:pb-10">{children}</main>
         <MobileBottomNav />
         <Toaster />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

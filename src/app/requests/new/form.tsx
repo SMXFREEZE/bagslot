@@ -6,12 +6,13 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { PriceChip } from "@/components/price-chip";
 import { ProhibitedWarning, BlockedWarning } from "@/components/prohibited-warning";
+import { ItemPhotoUploader } from "@/components/item-photo-uploader";
 import { checkSafety } from "@/lib/safety";
 import { quote } from "@/lib/pricing";
 import { createItemRequest } from "../actions";
 import type { Trip } from "@/lib/types/db";
 
-export function NewRequestForm({ trip }: { trip: Trip }) {
+export function NewRequestForm({ trip, userId }: { trip: Trip; userId: string }) {
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [weight, setWeight] = useState<string>("0.5");
@@ -117,6 +118,11 @@ export function NewRequestForm({ trip }: { trip: Trip }) {
         <div className="space-y-1.5 sm:col-span-2">
           <Label htmlFor="delivery_notes">Delivery notes</Label>
           <Textarea id="delivery_notes" name="delivery_notes" placeholder="Who picks it up, where, special handling." />
+        </div>
+
+        <div className="space-y-1.5 sm:col-span-2">
+          <Label>Photos (optional)</Label>
+          <ItemPhotoUploader userId={userId} name="item_photos" maxFiles={4} />
         </div>
       </div>
 

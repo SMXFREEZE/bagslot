@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { requireProfile } from "@/lib/auth";
+import { requireProfile, getCurrentUser } from "@/lib/auth";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { Card } from "@/components/ui/card";
 import { NewRequestForm } from "./form";
@@ -13,6 +13,7 @@ export default async function NewRequestPage({
   searchParams: Promise<{ trip?: string }>;
 }) {
   await requireProfile();
+  const user = await getCurrentUser();
   const sp = await searchParams;
   if (!sp.trip) redirect("/search");
 
@@ -29,7 +30,7 @@ export default async function NewRequestPage({
         Up to <span className="font-medium text-foreground">{trip.available_weight_kg} kg</span> free
       </p>
       <Card className="mt-6 p-6">
-        <NewRequestForm trip={trip} />
+        <NewRequestForm trip={trip} userId={user?.id ?? ""} />
       </Card>
     </div>
   );

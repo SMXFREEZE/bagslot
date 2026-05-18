@@ -9,7 +9,7 @@ const items = [
   { href: "/dashboard/traveler", label: "Trips", icon: Plane },
   { href: "/dashboard/sender", label: "Bookings", icon: Package },
   { href: "/notifications", label: "Inbox", icon: MessageSquare },
-  { href: "/dashboard", label: "Profile", icon: User },
+  { href: "/account", label: "Profile", icon: User },
 ];
 
 export function MobileBottomNav() {
