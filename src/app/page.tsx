@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { TripCard } from "@/components/trip-card";
 import { HeroSearch } from "@/components/hero-search";
 import { Marquee } from "@/components/marquee";
+import { VantaClouds2Lazy as VantaClouds2 } from "@/components/vanta-clouds2";
 import { StatRow } from "@/components/stat-row";
 import { CityCard } from "@/components/city-card";
 import { TestimonialCard } from "@/components/testimonial-card";
@@ -46,11 +47,14 @@ export default async function HomePage() {
   return (
     <>
       {/* ============================== HERO ============================== */}
-      <section className="relative overflow-hidden border-b border-border bg-gradient-to-b from-sand-50 via-background to-background">
-        <div className="dotgrid pointer-events-none absolute inset-0 opacity-[0.25]" />
-        <div className="absolute inset-x-0 top-0 mx-auto h-[480px] max-w-5xl bg-gradient-to-b from-brand-50/80 via-brand-50/20 to-transparent blur-3xl" />
+      <section className="relative overflow-hidden border-b border-border bg-background">
+        {/* Vanta 3D clouds — animated atmospheric background */}
+        <VantaClouds2 className="absolute inset-0 -z-0" />
+        {/* Soft fade so headline + search bar stay legible over the animation */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-[55%] bg-gradient-to-b from-background/75 via-background/40 to-transparent" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[55%] bg-gradient-to-t from-background via-background/70 to-transparent" />
 
-        <div className="container-page relative pt-16 pb-16 md:pt-24 md:pb-24">
+        <div className="container-page relative z-10 pt-16 pb-16 md:pt-24 md:pb-24">
           <div className="mx-auto max-w-3xl text-center">
             <span className="chip-outline">
               <Sparkles className="h-3.5 w-3.5 text-accent" />
