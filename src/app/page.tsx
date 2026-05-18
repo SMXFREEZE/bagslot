@@ -4,6 +4,9 @@ import { Button } from "@/components/ui/button";
 import { TripCard } from "@/components/trip-card";
 import { HeroSearch } from "@/components/hero-search";
 import { FeaturedRouteCard } from "@/components/featured-route-card";
+import { AnnouncementPill } from "@/components/announcement-pill";
+import { FadeIn } from "@/components/fade-in";
+import { TiltCard } from "@/components/tilt-card";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
 import type { Trip, Profile } from "@/lib/types/db";
 import { VantaClouds2Lazy as VantaClouds2 } from "@/components/vanta-clouds2";
@@ -35,6 +38,8 @@ export default async function HomePage() {
     travelers = Object.fromEntries(((profData as Profile[]) ?? []).map((p) => [p.id, p]));
   }
 
+  const tripCount = trips.length;
+
   return (
     <>
       {/* ============================== PRODUCT-FIRST HERO ============================== */}
@@ -43,30 +48,62 @@ export default async function HomePage() {
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[55%] bg-gradient-to-b from-background/80 via-background/40 to-transparent" />
         <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[60%] bg-gradient-to-t from-background via-background/85 to-transparent" />
 
-        <div className="container-page relative z-10 pt-12 pb-10 md:pt-20 md:pb-16">
+        <div className="container-page relative z-10 pt-12 pb-12 md:pt-20 md:pb-20">
           <div className="mx-auto max-w-3xl text-center">
-            <h1 className="display text-balance text-[40px] leading-[1.05] text-foreground sm:text-5xl md:text-[64px]">
-              Find someone <em className="font-serif italic">already flying</em> there.
-            </h1>
-            <p className="mx-auto mt-4 max-w-xl text-base text-muted-foreground md:text-lg">
-              Send small items with verified travelers who already have empty suitcase space.
-              From $5. Payment protected until delivery.
-            </p>
+            <FadeIn delay={0}>
+              <AnnouncementPill
+                href="/search"
+                prefix={tripCount > 0 ? `${tripCount} trips heading out this week` : "BagSlot is live"}
+                badge="Find a trip"
+              />
+            </FadeIn>
+
+            <FadeIn delay={0.1}>
+              <h1
+                className="display mt-8 text-balance text-foreground"
+                style={{
+                  fontSize: "clamp(2.5rem, 6vw, 4.75rem)",
+                  lineHeight: 1.04,
+                  letterSpacing: "-0.04em",
+                  fontWeight: 700,
+                }}
+              >
+                Find someone <em className="font-serif italic">already flying</em> there.
+              </h1>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <p className="mx-auto mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
+                Send small items with verified travelers who already have empty suitcase space.
+                From $5. Payment protected until delivery.
+              </p>
+            </FadeIn>
+
+            <FadeIn delay={0.3}>
+              <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+                <Button asChild size="lg" className="shadow-ink">
+                  <Link href="/search"><Search className="h-4 w-4" /> Find a trip</Link>
+                </Button>
+                <Button asChild size="lg" variant="outline">
+                  <Link href="#how-it-works">See how it works</Link>
+                </Button>
+              </div>
+            </FadeIn>
           </div>
 
-          <div className="mx-auto mt-8 max-w-4xl md:mt-10">
+          <FadeIn delay={0.45} className="mx-auto mt-12 max-w-4xl">
             <HeroSearch />
-          </div>
+          </FadeIn>
 
-          {/* Compact trust strip */}
-          <ul className="mx-auto mt-5 flex max-w-3xl flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
-            <li className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5" /> Payment held until delivery</li>
-            <li className="flex items-center gap-1.5"><EyeOff className="h-3.5 w-3.5" /> No sealed packages — ever</li>
-            <li className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5" /> ID-verified travelers</li>
-          </ul>
+          <FadeIn delay={0.55}>
+            <ul className="mx-auto mt-5 flex max-w-3xl flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs text-muted-foreground">
+              <li className="flex items-center gap-1.5"><Lock className="h-3.5 w-3.5" /> Payment held until delivery</li>
+              <li className="flex items-center gap-1.5"><EyeOff className="h-3.5 w-3.5" /> No sealed packages — ever</li>
+              <li className="flex items-center gap-1.5"><ShieldCheck className="h-3.5 w-3.5" /> ID-verified travelers</li>
+            </ul>
+          </FadeIn>
 
-          {/* Featured route chips */}
-          <div className="mx-auto mt-10 max-w-5xl">
+          <FadeIn delay={0.7} className="mx-auto mt-10 max-w-5xl">
             <div className="mb-3 text-center text-[11px] font-medium uppercase tracking-[0.14em] text-muted-foreground">
               Trending routes
             </div>
@@ -75,6 +112,42 @@ export default async function HomePage() {
                 <FeaturedRouteCard key={`${r.from}-${r.to}`} from={r.from} to={r.to} />
               ))}
             </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ============================== HOW IT WORKS (grid texture + 3D tilt cards) ============================== */}
+      <section
+        id="how-it-works"
+        className="relative overflow-hidden border-b border-border bg-background scroll-mt-24"
+      >
+        <div className="linegrid pointer-events-none absolute inset-0 opacity-30" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+
+        <div className="container-page relative py-16 md:py-24">
+          <FadeIn from="bottom" initial={false}>
+            <div className="mx-auto max-w-2xl text-center">
+              <span className="chip">How it works</span>
+              <h2 className="display mt-4 text-3xl md:text-4xl">
+                Three steps. No middleman. No mystery fees.
+              </h2>
+            </div>
+          </FadeIn>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            {[
+              { n: "01", title: "Find a trip", body: "Search by route, date, and weight. Verified travelers only. From $5." },
+              { n: "02", title: "Submit your item", body: "Describe it, snap a photo. Our safety checker flags anything risky before the traveler reviews." },
+              { n: "03", title: "Handoff, paid out", body: "Pay into escrow. Funds release when the recipient confirms delivery with a one-time code." },
+            ].map((step, i) => (
+              <TiltCard key={step.n} delay={0.1 + i * 0.1}>
+                <div className="card-surface flex h-full flex-col p-7">
+                  <div className="font-mono text-xs text-muted-foreground">{step.n}</div>
+                  <h3 className="mt-3 text-lg font-semibold">{step.title}</h3>
+                  <p className="mt-1.5 text-sm text-muted-foreground">{step.body}</p>
+                </div>
+              </TiltCard>
+            ))}
           </div>
         </div>
       </section>
@@ -82,17 +155,19 @@ export default async function HomePage() {
       {/* ============================== LIVE TRIPS ============================== */}
       <section className="border-b border-border bg-background">
         <div className="container-page py-12 md:py-16">
-          <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-            <div>
-              <h2 className="display text-2xl md:text-3xl">Trips heading out soon</h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Real travelers, real routes. Tap a trip to request space.
-              </p>
+          <FadeIn from="bottom" initial={false}>
+            <div className="mb-6 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
+              <div>
+                <h2 className="display text-2xl md:text-3xl">Trips heading out soon</h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Real travelers, real routes. Tap a trip to request space.
+                </p>
+              </div>
+              <Button asChild variant="ghost" size="sm" className="self-start md:self-auto">
+                <Link href="/search">See all <ArrowRight className="h-4 w-4" /></Link>
+              </Button>
             </div>
-            <Button asChild variant="ghost" size="sm" className="self-start md:self-auto">
-              <Link href="/search">See all <ArrowRight className="h-4 w-4" /></Link>
-            </Button>
-          </div>
+          </FadeIn>
 
           {trips.length === 0 ? (
             <div className="rounded-2xl border border-dashed border-border bg-card/40 p-10 text-center">
@@ -107,42 +182,47 @@ export default async function HomePage() {
             </div>
           ) : (
             <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {trips.map((trip) => (
-                <TripCard
-                  key={trip.id}
-                  trip={trip}
-                  traveler={travelers[trip.traveler_id] ?? {
-                    id: trip.traveler_id,
-                    full_name: "Traveler",
-                    avatar_url: null,
-                    rating_average: 0,
-                    rating_count: 0,
-                    verification_status: "unverified",
-                  }}
-                />
+              {trips.map((trip, i) => (
+                <FadeIn key={trip.id} initial={false} delay={i * 0.05}>
+                  <TripCard
+                    trip={trip}
+                    traveler={travelers[trip.traveler_id] ?? {
+                      id: trip.traveler_id,
+                      full_name: "Traveler",
+                      avatar_url: null,
+                      rating_average: 0,
+                      rating_count: 0,
+                      verification_status: "unverified",
+                    }}
+                  />
+                </FadeIn>
               ))}
             </div>
           )}
         </div>
       </section>
 
-      {/* ============================== TWO-PATH BAND ============================== */}
+      {/* ============================== TWO-PATH BAND (with tilt) ============================== */}
       <section className="border-b border-border bg-sand-50/60">
         <div className="container-page grid gap-4 py-12 md:grid-cols-2 md:py-16">
-          <PathCard
-            icon={Search}
-            title="Send something"
-            body="Find a trusted traveler going your way. Pay only when they accept."
-            ctaHref="/search"
-            ctaLabel="Find a trip"
-          />
-          <PathCard
-            icon={Plane}
-            title="Earn from your trip"
-            body="Already flying? Turn empty kilos into $80 – $400 per trip."
-            ctaHref="/trips/new"
-            ctaLabel="Post a trip"
-          />
+          <TiltCard delay={0} intensity={4}>
+            <PathCard
+              icon={Search}
+              title="Send something"
+              body="Find a trusted traveler going your way. Pay only when they accept."
+              ctaHref="/search"
+              ctaLabel="Find a trip"
+            />
+          </TiltCard>
+          <TiltCard delay={0.1} intensity={4}>
+            <PathCard
+              icon={Plane}
+              title="Earn from your trip"
+              body="Already flying? Turn empty kilos into $80 – $400 per trip."
+              ctaHref="/trips/new"
+              ctaLabel="Post a trip"
+            />
+          </TiltCard>
         </div>
       </section>
 
@@ -150,21 +230,27 @@ export default async function HomePage() {
       <section className="border-b border-border bg-background">
         <div className="container-page py-12 md:py-14">
           <div className="grid gap-4 md:grid-cols-3">
-            <SafetyCell
-              icon={ShieldCheck}
-              title="No sealed packages"
-              body="Travelers must inspect every item before pickup. No exceptions."
-            />
-            <SafetyCell
-              icon={Lock}
-              title="Escrowed payments"
-              body="Funds are held until the recipient confirms delivery with a one-time code."
-            />
-            <SafetyCell
-              icon={Package}
-              title="Prohibited items blocked"
-              body="Our safety checker flags risky items in real time, before the traveler sees them."
-            />
+            <FadeIn initial={false} delay={0}>
+              <SafetyCell
+                icon={ShieldCheck}
+                title="No sealed packages"
+                body="Travelers must inspect every item before pickup. No exceptions."
+              />
+            </FadeIn>
+            <FadeIn initial={false} delay={0.1}>
+              <SafetyCell
+                icon={Lock}
+                title="Escrowed payments"
+                body="Funds are held until the recipient confirms delivery with a one-time code."
+              />
+            </FadeIn>
+            <FadeIn initial={false} delay={0.2}>
+              <SafetyCell
+                icon={Package}
+                title="Prohibited items blocked"
+                body="Our safety checker flags risky items in real time, before the traveler sees them."
+              />
+            </FadeIn>
           </div>
           <div className="mt-6 text-center">
             <Link href="/safety" className="text-sm font-medium text-foreground underline-offset-4 hover:underline">
@@ -204,7 +290,7 @@ function PathCard({
   return (
     <Link
       href={ctaHref}
-      className="group flex flex-col gap-3 rounded-2xl border border-border bg-card p-6 transition hover:border-foreground hover:shadow-soft"
+      className="group flex h-full flex-col gap-3 rounded-2xl border border-border bg-card p-6 transition hover:border-foreground hover:shadow-soft"
     >
       <Icon className="h-5 w-5 text-foreground" />
       <div>
