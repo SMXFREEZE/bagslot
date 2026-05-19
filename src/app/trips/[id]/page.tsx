@@ -15,6 +15,8 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 import { getCurrentUser } from "@/lib/auth";
 import { formatDate, formatCurrency } from "@/lib/utils";
 import { destinationImage } from "@/lib/city-images";
+import { TripActions } from "@/components/trip-actions";
+import { env } from "@/lib/env";
 import type { Trip, Profile } from "@/lib/types/db";
 
 export default async function TripDetailPage({ params }: { params: Promise<{ id: string }> }) {
@@ -57,6 +59,13 @@ export default async function TripDetailPage({ params }: { params: Promise<{ id:
           </h1>
           <div className="text-sm text-muted-foreground">
             {trip.departure_country} → {trip.destination_country}
+          </div>
+          <div className="mt-4">
+            <TripActions
+              tripId={trip.id}
+              route={`${trip.departure_city} → ${trip.destination_city}`}
+              fullUrl={`${env.appUrl}/trips/${trip.id}`}
+            />
           </div>
         </div>
 

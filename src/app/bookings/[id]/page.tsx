@@ -15,6 +15,7 @@ import { formatDate, formatCurrency } from "@/lib/utils";
 import type { Booking, Trip, ItemRequest, Profile } from "@/lib/types/db";
 import { BookingActions } from "./actions-ui";
 import { ReviewForm } from "./review-form";
+import { CelebrateOnComplete } from "@/components/celebrate-on-complete";
 
 export default async function BookingDetailPage({
   params,
@@ -48,11 +49,8 @@ export default async function BookingDetailPage({
 
   return (
     <div className="container-page max-w-5xl py-8">
-      {sp.paid === "1" && (
-        <div className="mb-4 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-900">
-          Payment received — funds held in escrow until delivery is confirmed.
-        </div>
-      )}
+      <CelebrateOnComplete status={booking.status} variant="completed" />
+      {sp.paid === "1" && <CelebrateOnComplete status="paid" variant="paid" />}
 
       <div className="flex items-center justify-between gap-4">
         <div>

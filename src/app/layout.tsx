@@ -6,6 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { MobileBottomNav } from "@/components/mobile-bottom-nav";
 import { Toaster } from "@/components/toast";
 import { NativeBootstrap } from "@/components/native-bootstrap";
+import { CommandPalette } from "@/components/command-palette";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -61,6 +62,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
         </main>
         <MobileBottomNav />
+        <CommandPalette />
         <Toaster />
         <NativeBootstrap />
         <Analytics />

@@ -4,7 +4,9 @@ import { Card } from "@/components/ui/card";
 import { TripCard } from "@/components/trip-card";
 import { EmptyState } from "@/components/empty-state";
 import { SearchFilters } from "./filters";
+import { RouteAlertBanner } from "@/components/route-alert-banner";
 import { createSupabaseServerClient } from "@/lib/supabase/server";
+import { getCurrentUser } from "@/lib/auth";
 import type { Trip, Profile } from "@/lib/types/db";
 
 export const metadata = { title: "Find a trip" };
@@ -62,6 +64,9 @@ export default async function SearchPage({
 
   const activeFilterCount =
     (sp.from ? 1 : 0) + (sp.to ? 1 : 0) + (sp.date ? 1 : 0) + (sp.weight ? 1 : 0) + (sp.max_price ? 1 : 0);
+
+  const user = await getCurrentUser();
+  const hasFilter = Boolean(sp.from || sp.to || sp.date);
 
   return (
     <div>
@@ -124,13 +129,17 @@ export default async function SearchPage({
           </div>
         )}
 
-        <Card className="mt-10 bg-sand-50/40 p-6 text-center md:p-8">
-          <Plane className="mx-auto h-5 w-5 text-foreground" />
-          <h3 className="mt-3 text-base font-semibold">Don&apos;t see your route?</h3>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Travelers are added every day. Save this search or post your route as a sender.
-          </p>
-        </Card>
+        {hasFilter && (
+          <div className="mt-8">
+            <RouteAlertBanner
+              from={sp.from}
+              to={sp.to}
+              date={sp.date}
+              weight={sp.weight}
+              signedIn={!!user}
+            />
+          </div>
+        )}
       </div>
     </div>
   );
