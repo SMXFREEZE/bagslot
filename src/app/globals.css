@@ -35,6 +35,16 @@
     --ring: 222 47% 9%;
 
     --radius: 0.875rem;
+
+    /* iOS system tokens (light) — used for native-feel screens */
+    --ios-grouped-bg: 240 7% 96%;        /* #F2F2F7 systemGroupedBackground */
+    --ios-card: 0 0% 100%;
+    --ios-separator: 240 6% 87%;          /* #C6C6C8 separator */
+    --ios-label: 0 0% 0%;
+    --ios-label-secondary: 240 6% 39%;    /* #636366 secondaryLabel */
+    --ios-label-tertiary: 240 4% 56%;     /* #8E8E93 tertiaryLabel */
+    --ios-tint: 211 100% 50%;             /* iOS blue (used only sparingly; we mostly stay monochrome) */
+    --ios-fill: 240 6% 90%;               /* #E5E5EA */
   }
 }
 
@@ -95,6 +105,103 @@
       0 8px 24px -8px hsl(var(--foreground) / 0.25),
       0 2px 4px -2px hsl(var(--foreground) / 0.1);
   }
+
+  /* =========================================================================
+   * iOS-style primitives. Use these on mobile-first screens for native feel.
+   * ========================================================================= */
+  .ios-screen {
+    background: hsl(var(--ios-grouped-bg));
+    min-height: 100dvh;
+  }
+  .ios-title-large {
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.022em;
+    line-height: 1.06;
+    color: hsl(var(--ios-label));
+  }
+  .ios-title-1 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+  .ios-headline {
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: -0.013em;
+  }
+  .ios-body { font-size: 17px; letter-spacing: -0.013em; }
+  .ios-callout { font-size: 16px; letter-spacing: -0.011em; }
+  .ios-footnote {
+    font-size: 13px;
+    color: hsl(var(--ios-label-secondary));
+    letter-spacing: -0.008em;
+  }
+  .ios-caption {
+    font-size: 12px;
+    color: hsl(var(--ios-label-tertiary));
+    letter-spacing: -0.006em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .ios-group {
+    background: hsl(var(--ios-card));
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .ios-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    min-height: 44px;
+    background: hsl(var(--ios-card));
+    position: relative;
+  }
+  .ios-row + .ios-row::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 16px;
+    right: 0;
+    height: 1px;
+    background: hsl(var(--ios-separator) / 0.7);
+  }
+  .ios-row-link {
+    cursor: pointer;
+    transition: background 100ms;
+  }
+  .ios-row-link:active { background: hsl(var(--ios-fill)); }
+
+  .ios-search {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 36px;
+    padding: 0 12px;
+    border-radius: 10px;
+    background: hsl(var(--ios-fill));
+    color: hsl(var(--ios-label));
+    font-size: 17px;
+  }
+  .ios-search input {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    font-size: 17px;
+  }
+
+  .ios-button-tinted {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 font-medium transition;
+    background: hsl(var(--foreground));
+    color: hsl(var(--background));
+    height: 50px;
+    font-size: 17px;
+  }
+  .ios-button-tinted:active { opacity: 0.85; }
 }
 
 @keyframes marquee {
