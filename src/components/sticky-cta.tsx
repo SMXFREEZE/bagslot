@@ -22,9 +22,10 @@ export function StickyCTA({
   return (
     <div
       className={cn(
-        "fixed inset-x-0 bottom-14 z-30 border-t border-border bg-background/95 px-4 py-3 backdrop-blur-xl md:hidden",
+        "fixed inset-x-0 z-30 border-t border-border bg-background/95 px-4 py-3 backdrop-blur-xl md:hidden",
         className,
       )}
+      style={{ bottom: "calc(3.5rem + env(safe-area-inset-bottom))" }}
     >
       <Button asChild size="lg" className="w-full" variant={variant}>
         <Link href={href}>
