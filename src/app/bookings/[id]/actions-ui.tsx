@@ -13,6 +13,7 @@ import {
   confirmDelivery,
   openDispute,
 } from "../actions";
+import { haptic } from "@/lib/native";
 import type { Booking } from "@/lib/types/db";
 
 export function BookingActions({
@@ -28,11 +29,13 @@ export function BookingActions({
   const [showDispute, setShowDispute] = useState(false);
   const [disputeReason, setDisputeReason] = useState("");
 
-  const run = (fn: () => Promise<unknown>) => {
+  const run = (fn: () => Promise<unknown>, feedback: "success" | "warning" | "error" | "light" = "success") => {
     setError(null);
+    void haptic("light");
     startTransition(async () => {
       try {
         await fn();
+        void haptic(feedback);
       } catch (e) {
         setError(e instanceof Error ? e.message : "Something went wrong.");
       }

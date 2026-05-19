@@ -1,0 +1,8 @@
+ios
+android
+resources
+*.xcworkspace
+*.xcodeproj
+DerivedData
+Pods
+docs/app-store-setup.md

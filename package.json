@@ -8,9 +8,21 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
-    "seed": "tsx scripts/seed.ts"
+    "seed": "tsx scripts/seed.ts",
+    "ios:add": "cap add ios",
+    "ios:sync": "cap sync ios",
+    "ios:open": "cap open ios",
+    "ios:assets": "capacitor-assets generate --ios --iconBackgroundColor '#0A0A0F' --iconBackgroundColorDark '#0A0A0F' --splashBackgroundColor '#FBFAF9' --splashBackgroundColorDark '#0A0A0F'"
   },
   "dependencies": {
+    "@capacitor/app": "^6.0.2",
+    "@capacitor/core": "^6.2.0",
+    "@capacitor/haptics": "^6.0.2",
+    "@capacitor/ios": "^6.2.0",
+    "@capacitor/push-notifications": "^6.0.4",
+    "@capacitor/share": "^6.0.3",
+    "@capacitor/splash-screen": "^6.0.3",
+    "@capacitor/status-bar": "^6.0.2",
     "@hookform/resolvers": "^3.9.0",
     "@radix-ui/react-avatar": "^1.1.1",
     "@radix-ui/react-dialog": "^1.1.2",
@@ -46,6 +58,8 @@
     "zustand": "^5.0.0"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^6.2.0",
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",

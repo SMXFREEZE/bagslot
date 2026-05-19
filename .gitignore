@@ -17,3 +17,13 @@ dist
 next-env.d.ts
 
 .vercel
+
+# Capacitor iOS — generated locally by `npx cap add ios` on macOS.
+# Commit only if you want shared CocoaPods lock; otherwise re-generate per machine.
+ios/App/build/
+ios/App/Pods/
+ios/DerivedData/
+ios/.build/
+*.xcuserstate
+xcuserdata/
+
